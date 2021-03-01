@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scriptures.shareApp.dao.mapper.CommodityMapper">
+    <resultMap id="BaseResultMap" type="com.scriptures.shareApp.dao.entity.Commodity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="commodity_name" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="commodity_introduction" jdbcType="VARCHAR"
+                property="commodityIntroduction"/>
+        <result column="commodity_prices" jdbcType="DOUBLE" property="commodityPrices"/>
+        <result column="commodity_link" jdbcType="VARCHAR" property="commodityLink"/>
+        <result column="commodity_category" jdbcType="VARCHAR"
+                property="commodityCategory"/>
+        <result column="commission" jdbcType="DOUBLE" property="commission"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+    </resultMap>
+
+    <resultMap id="CommodityShareVo" type="com.scriptures.shareApp.vo.CommodityShareVo">
+        <id column="t" jdbcType="VARCHAR" property="id"/>
+        <result column="a" jdbcType="VARCHAR" property="code"/>
+        <result column="commodity_name" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="share_counts" jdbcType="INTEGER" property="shareCounts"/>
+        <result column="deal_count" jdbcType="INTEGER" property="dealCount"/>
+        <result column="deal_money" jdbcType="DOUBLE" property="dealMoney"/>
+        <result column="award_amount" jdbcType="DOUBLE" property="awardAmount"/>
+        <result column="clicks" jdbcType="INTEGER" property="clicks"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		id, cover, commodity_name, commodity_introduction, commodity_prices,
+		commodity_link,
+		commodity_category, commission, create_by, create_date, update_by, update_date, remarks,
+		del_flag,code,label
+	</sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_commodity
+        where id = #{id,jdbcType=VARCHAR}
+        and del_flag = 0
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from tb_commodity
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+    <insert id="insert" parameterType="com.scriptures.shareApp.dao.entity.Commodity">
+		insert into tb_commodity (id, cover, commodity_name,
+		commodity_introduction, commodity_prices,
+		commodity_link, commodity_category, commission,
+		create_by, create_date, update_by,
+		update_date, remarks, del_flag,code,label
+		)
+		values (#{id,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
+		#{commodityName,jdbcType=VARCHAR},
+		#{commodityIntroduction,jdbcType=VARCHAR},
+		#{commodityPrices,jdbcType=DOUBLE},
+		#{commodityLink,jdbcType=VARCHAR}, #{commodityCategory,jdbcType=VARCHAR}, #{commission,jdbcType=DOUBLE},
+		#{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateBy,jdbcType=VARCHAR},
+		#{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER},
+		#{code,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}
+		)
+	</insert>
+    <insert id="insertSelective" parameterType="com.scriptures.shareApp.dao.entity.Commodity">
+        insert into tb_commodity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="commodityName != null">
+                commodity_name,
+            </if>
+            <if test="commodityIntroduction != null">
+                commodity_introduction,
+            </if>
+            <if test="commodityPrices != null">
+                commodity_prices,
+            </if>
+            <if test="commodityLink != null">
+                commodity_link,
+            </if>
+            <if test="commodityCategory != null">
+                commodity_category,
+            </if>
+            <if test="commission != null">
+                commission,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="label != null">
+                label,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityIntroduction != null">
+                #{commodityIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityPrices != null">
+                #{commodityPrices,jdbcType=DOUBLE},
+            </if>
+            <if test="commodityLink != null">
+                #{commodityLink,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityCategory != null">
+                #{commodityCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="label != null">
+                #{label,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.scriptures.shareApp.dao.entity.Commodity">
+        update tb_commodity
+        <set>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodity_name = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityIntroduction != null">
+                commodity_introduction = #{commodityIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityPrices != null">
+                commodity_prices = #{commodityPrices,jdbcType=DOUBLE},
+            </if>
+            <if test="commodityLink != null">
+                commodity_link = #{commodityLink,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityCategory != null">
+                commodity_category = #{commodityCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                commission = #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="label != null">
+                label = #{label,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeySelective2" parameterType="com.scriptures.shareApp.dao.entity.Commodity">
+        update tb_commodity
+        <set>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodity_name = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityIntroduction != null">
+                commodity_introduction = #{commodityIntroduction,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityPrices != null">
+                commodity_prices = #{commodityPrices,jdbcType=DOUBLE},
+            </if>
+            <if test="commodityLink != null">
+                commodity_link = #{commodityLink,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityCategory != null">
+                commodity_category = #{commodityCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                commission = #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            label = #{label,jdbcType=VARCHAR},
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.scriptures.shareApp.dao.entity.Commodity">
+		update tb_commodity
+		set cover = #{cover,jdbcType=VARCHAR},
+		commodity_name = #{commodityName,jdbcType=VARCHAR},
+		commodity_introduction = #{commodityIntroduction,jdbcType=VARCHAR},
+		commodity_prices = #{commodityPrices,jdbcType=DOUBLE},
+		commodity_link = #{commodityLink,jdbcType=VARCHAR},
+		commodity_category = #{commodityCategory,jdbcType=VARCHAR},
+		commission = #{commission,jdbcType=DOUBLE},
+		create_by = #{createBy,jdbcType=VARCHAR},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_by = #{updateBy,jdbcType=VARCHAR},
+		update_date = #{updateDate,jdbcType=TIMESTAMP},
+		remarks = #{remarks,jdbcType=VARCHAR},
+		del_flag = #{delFlag,jdbcType=INTEGER},
+		code = #{code,jdbcType=VARCHAR},
+		label = #{label,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+    <select id="selectFuzzy" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        from tb_commodity
+        where
+        del_flag=0
+        <if test="name != null">
+            and commodity_name LIKE '%${name}%'
+        </if>
+        <if test="remarks != null">
+            and remarks LIKE'${remarks}'
+        </if>
+        <if test="commodityCategory != null">
+            and commodity_category = '${commodityCategory}'
+        </if>
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="selectFuzzyByKey" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        FROM tb_commodity
+        WHERE
+        del_flag=0
+        AND commodity_name LIKE '%${key}%'
+        AND commodity_category LIKE '%${category}%'
+        AND (create_date BETWEEN '${startDay}' AND '${endDay}')
+        ORDER BY create_date DESC
+    </select>
+
+    <update id="deleteSome" parameterType="java.util.List">
+        UPDATE tb_commodity set del_flag = 1 , update_by =
+        #{handler,jdbcType=VARCHAR} , update_date = #{date,jdbcType=TIMESTAMP}
+        where id IN
+        <foreach collection="list" item="list" index="index" open="("
+                 separator="," close=")">
+            #{list}
+        </foreach>
+        and del_flag = 0
+    </update>
+
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_commodity
+        where
+        commodity_category = #{id}
+        and del_flag = 0
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="getAllCounts" resultType="Integer">
+      select count(*)
+      from tb_commodity
+      where del_flag=0
+      ORDER BY create_date DESC
+</select>
+
+    <select id="selectByName" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        from tb_commodity
+        <where>
+            <if test="name != null">
+                commodity_name LIKE "%"#{name}"%"
+            </if>
+            and del_flag=0
+        </where>
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="selectShareData" resultMap="CommodityShareVo">
+        select id as t,commodity_name , code as a ,
+(select SUM(num) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) as deal_count,
+(select count(*) from (select member_id ,tb_sharedate_commodity.code as b from tb_sharedate_commodity , tb_commodity where  tb_sharedate_commodity.`code`=tb_commodity.`code` GROUP BY member_id) as share where  b = a) as share_counts,
+(SELECT SUM(buyamount) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) as deal_money,
+((SELECT SUM(buyamount) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) * commission) as award_amount,
+(select count(*) from tb_share_commodity where tb_share_commodity.commodity_id = t) as clicks
+from tb_commodity where del_flag = 0
+    </select>
+
+    <select id="selectShareDataByName" resultMap="CommodityShareVo">
+        select id as t,commodity_name , code as a ,
+(select SUM(num) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) as deal_count,
+(select count(*) from (select member_id ,tb_sharedate_commodity.code as b from tb_sharedate_commodity , tb_commodity where  tb_sharedate_commodity.`code`=tb_commodity.`code` GROUP BY member_id) as share where  b = a) as share_counts,
+(SELECT SUM(buyamount) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) as deal_money,
+((SELECT SUM(buyamount) from tb_sharedate_commodity where  tb_sharedate_commodity.`code`= a) * commission) as award_amount,
+(select count(*) from tb_share_commodity where tb_share_commodity.commodity_id = t) as clicks
+from tb_commodity where del_flag = 0 AND commodity_name LIKE "%"#{commodityName}"%"
+    </select>
+</mapper>

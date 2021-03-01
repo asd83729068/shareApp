@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scriptures.shareApp.dao.mapper.ShareMapper">
+    <resultMap id="BaseResultMap" type="com.scriptures.shareApp.dao.entity.Share">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="type_id" jdbcType="VARCHAR" property="typeId"/>
+        <result column="member_id" jdbcType="VARCHAR" property="memberId"/>
+        <result column="share_way" jdbcType="VARCHAR" property="shareWay"/>
+        <result column="clicks" jdbcType="INTEGER" property="clicks"/>
+        <result column="reward" jdbcType="DOUBLE" property="reward"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+        <result column="nickname" jdbcType="VARCHAR" property="memberNickName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    tb_share.id, type, type_id, member_id, share_way, clicks, reward, tb_share.create_by, tb_share.create_date,
+    tb_share.update_by, tb_share.update_date, tb_share.remarks, tb_share.del_flag
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_share
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.scriptures.shareApp.dao.entity.Share">
+    insert into tb_share (id, type, type_id, 
+      member_id, share_way, clicks, 
+      reward, create_by, create_date, 
+      update_by, update_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{typeId,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=VARCHAR}, #{shareWay,jdbcType=VARCHAR}, #{clicks,jdbcType=INTEGER}, 
+      #{reward,jdbcType=DOUBLE}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.scriptures.shareApp.dao.entity.Share">
+        insert into tb_share
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="shareWay != null">
+                share_way,
+            </if>
+            <if test="clicks != null">
+                clicks,
+            </if>
+            <if test="reward != null">
+                reward,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="shareWay != null">
+                #{shareWay,jdbcType=VARCHAR},
+            </if>
+            <if test="clicks != null">
+                #{clicks,jdbcType=INTEGER},
+            </if>
+            <if test="reward != null">
+                #{reward,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.scriptures.shareApp.dao.entity.Share">
+        update tb_share
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=VARCHAR},
+            </if>
+            <if test="shareWay != null">
+                share_way = #{shareWay,jdbcType=VARCHAR},
+            </if>
+            <if test="clicks != null">
+                clicks = #{clicks,jdbcType=INTEGER},
+            </if>
+            <if test="reward != null">
+                reward = #{reward,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.scriptures.shareApp.dao.entity.Share">
+    update tb_share
+    set type = #{type,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=VARCHAR},
+      share_way = #{shareWay,jdbcType=VARCHAR},
+      clicks = #{clicks,jdbcType=INTEGER},
+      reward = #{reward,jdbcType=DOUBLE},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectById" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where id=#{id} and del_flag=0
+    </select>
+
+    <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where del_flag=0
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="selectTypeZero" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where type=1 and del_flag=0
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="selectTypeOne" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where type=2 and del_flag=0
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="likeSearch" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,tb_member.nickname
+        from tb_share,tb_member
+        <where>
+            tb_share.member_id=tb_member.id
+            AND
+            (
+            <if test="key != null">
+                tb_share.member_id LIKE "%"#{key}"%"
+
+                or tb_share.share_way LIKE "%"#{key}"%"
+
+                or tb_share.type_id LIKE "%"#{key}"%"
+            </if>
+            and tb_share.del_flag=0)
+        </where>
+        ORDER BY create_date DESC
+    </select>
+
+    <update id="deleteSome" parameterType="java.util.List">
+        UPDATE tb_share SET del_flag = 1 , update_by = #{updateBy},update_date=#{updateDate} WHERE id IN
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="selectShareById" parameterType="map" resultMap="BaseResultMap">
+        select
+
+        <include refid="Base_Column_List"/>
+
+        from tb_share
+
+        where type_id=#{typeId} AND del_flag=0
+
+        ORDER BY create_date DESC
+    </select>
+    <select id="selectByTypeId" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where type_id=#{typeId}
+        AND del_flag=0
+    </select>
+    <select id="selectByTypeIdByKey" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_share
+        where type_id=#{typeId}
+        AND del_flag=0
+        AND (create_by LIKE '%${key}%')
+    </select>
+
+    <resultMap id="OrderVo" type="com.scriptures.shareApp.vo.ArticleOrderVo">
+        <result column="type_id" jdbcType="VARCHAR" property="articleId"/>
+        <result column="article_title" jdbcType="VARCHAR" property="articleTitle"/>
+        <result column="shares" jdbcType="INTEGER" property="shareNum"/>
+        <result column="reward" jdbcType="DOUBLE" property="reward"/>
+    </resultMap>
+
+    <select id="selectShareOrder" resultMap="OrderVo">
+    SELECT
+      type_id,tb_article.article_title ,SUM(clicks) as shares , SUM(reward) as reward
+    FROM tb_share , tb_article
+    where tb_article.id=tb_share.type_id
+    and tb_article.del_flag=0
+    GROUP BY type_id
+    ORDER BY shares DESC LIMIT ${limit}  ;
+</select>
+</mapper>

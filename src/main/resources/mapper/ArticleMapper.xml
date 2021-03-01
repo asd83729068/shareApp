@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scriptures.shareApp.dao.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.scriptures.shareApp.dao.entity.Article">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="article_title" jdbcType="VARCHAR" property="articleTitle"/>
+        <result column="commission" jdbcType="DOUBLE" property="commission"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <result column="del_flag" jdbcType="INTEGER" property="delFlag"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.scriptures.shareApp.dao.entity.Article">
+        <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, cover, author, article_title, commission, create_by, create_date, update_by,
+    update_date, remarks, del_flag,label
+  </sql>
+    <sql id="Blob_Column_List">
+    article_content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_article
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_article
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.scriptures.shareApp.dao.entity.Article">
+    insert into tb_article (id, cover, author, 
+      article_title, commission, create_by, 
+      create_date, update_by, update_date, 
+      remarks, del_flag, article_content,label
+      )
+    values (#{id,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{articleTitle,jdbcType=VARCHAR}, #{commission,jdbcType=DOUBLE}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=INTEGER}, #{articleContent,jdbcType=LONGVARCHAR},
+      #{label,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.scriptures.shareApp.dao.entity.Article">
+        insert into tb_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="articleTitle != null">
+                article_title,
+            </if>
+            <if test="commission != null">
+                commission,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+            <if test="label != null">
+                label,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="label != null">
+                #{label,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.scriptures.shareApp.dao.entity.Article">
+        update tb_article
+        <set>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                commission = #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="label != null">
+                label = #{label,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeySelective2" parameterType="com.scriptures.shareApp.dao.entity.Article">
+        update tb_article
+        <set>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="commission != null">
+                commission = #{commission,jdbcType=DOUBLE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+            label = #{label,jdbcType=VARCHAR},
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scriptures.shareApp.dao.entity.Article">
+    update tb_article
+    set cover = #{cover,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      commission = #{commission,jdbcType=DOUBLE},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      label = #{label,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.scriptures.shareApp.dao.entity.Article">
+    update tb_article
+    set cover = #{cover,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR},
+      commission = #{commission,jdbcType=DOUBLE},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      label = #{label,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectFuzzy" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        from tb_article
+        where
+        del_flag=0
+        <if test="author != null">
+            and author LIKE '%${author}%'
+        </if>
+        <if test="remarks != null">
+            and remarks LIKE'${remarks}'
+        </if>
+        <if test="articleTitle != null">
+            and article_title = '%${articleTitle}%'
+        </if>
+        <if test="createBy != null">
+            and create_by = '${createBy}'
+        </if>
+        ORDER BY create_date DESC
+    </select>
+
+    <update id="deleteSome" parameterType="java.util.List">
+        UPDATE tb_article set del_flag = 1 , update_by = #{handler,jdbcType=VARCHAR} , update_date =
+        #{date,jdbcType=TIMESTAMP} where id IN
+        <foreach collection="list" item="list" index="index" open="(" separator="," close=")">
+            #{list}
+        </foreach>
+        and del_flag = 0
+    </update>
+
+    <select id="selectFuzzyByKey" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM tb_article
+        WHERE
+        del_flag = 0
+        AND (author LIKE '%${key}%' OR article_title LIKE '%${key}%')
+        AND (create_date BETWEEN '${startDay}' AND '${endDay}')
+        ORDER BY create_date DESC
+    </select>
+
+    <select id="getAllCounts" resultType="Integer">
+      select count(*) from tb_article where del_flag=0
+</select>
+
+    <select id="selectByTitle" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        from tb_article
+        <where>
+            <if test="title != null">
+                article_title LIKE "%"#{title}"%"
+            </if>
+            and del_flag=0
+        </where>
+        ORDER BY create_date DESC
+    </select>
+
+</mapper>

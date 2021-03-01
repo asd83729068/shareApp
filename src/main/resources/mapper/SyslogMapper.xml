@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scriptures.shareApp.dao.mapper.SyslogMapper">
+  <resultMap id="BaseResultMap" type="com.scriptures.shareApp.dao.entity.Syslog">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="remote_addr" jdbcType="VARCHAR" property="remoteAddr" />
+    <result column="request_uri" jdbcType="VARCHAR" property="requestUri" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="exception" jdbcType="VARCHAR" property="exception" />
+  </resultMap>
+  <resultMap id="SysInfoResultMap" type="com.scriptures.shareApp.vo.SysLogVo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="remote_addr" jdbcType="VARCHAR" property="remoteAddr" />
+    <result column="request_uri" jdbcType="VARCHAR" property="requestUri" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="exception" jdbcType="VARCHAR" property="exception" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, create_by, create_date, remote_addr, request_uri, remarks, exception
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scriptures.shareApp.dao.entity.Syslog">
+    insert into sys_log (id, title, create_by, 
+      create_date, remote_addr, request_uri, 
+      remarks, exception)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{remoteAddr,jdbcType=VARCHAR}, #{requestUri,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{exception,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scriptures.shareApp.dao.entity.Syslog">
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="remoteAddr != null">
+        remote_addr,
+      </if>
+      <if test="requestUri != null">
+        request_uri,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="exception != null">
+        exception,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remoteAddr != null">
+        #{remoteAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUri != null">
+        #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        #{exception,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scriptures.shareApp.dao.entity.Syslog">
+    update sys_log
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remoteAddr != null">
+        remote_addr = #{remoteAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUri != null">
+        request_uri = #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="exception != null">
+        exception = #{exception,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scriptures.shareApp.dao.entity.Syslog">
+    update sys_log
+    set title = #{title,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      remote_addr = #{remoteAddr,jdbcType=VARCHAR},
+      request_uri = #{requestUri,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      exception = #{exception,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultMap="SysInfoResultMap">
+  select a.id as id,b.note as title,a.create_by as create_by,a.create_date as create_date,
+  a.remote_addr as remote_addr,a.request_uri as request_uri,a.remarks as remarks,a.exception as exception
+  from sys_log as a,tb_request_note as b where a.request_uri=b.request_url
+   ORDER BY create_date DESC
+</select>
+  
+</mapper>
